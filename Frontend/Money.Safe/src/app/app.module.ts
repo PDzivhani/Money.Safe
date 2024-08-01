@@ -16,6 +16,7 @@ import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { ExpensesComponent } from './components/expenses/expenses.component';
 import { ToDoComponent } from './components/to-do/to-do.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ToDoComponent } from './components/to-do/to-do.component';
     ToolBarComponent,
     TransactionsComponent,
     ExpensesComponent,
-    ToDoComponent
+    ToDoComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

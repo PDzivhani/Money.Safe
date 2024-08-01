@@ -8,6 +8,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { UserAuthFormComponent } from './components/user-auth-form/user-auth-form.component';
 import { ExpensesComponent } from './components/expenses/expenses.component';
 import { ToDoComponent } from './components/to-do/to-do.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'balance', component: BalanceTrackingComponent },
   {path:'expense',component:ExpensesComponent},
   {path:'todo',component:ToDoComponent},
+  {path:'profile',component:ProfileComponent},
   { path: 'transactions', component: TransactionsComponent },
   { path: 'calculator', component: CalculatorComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' } ,// Redirect to home page on any unknown paths
