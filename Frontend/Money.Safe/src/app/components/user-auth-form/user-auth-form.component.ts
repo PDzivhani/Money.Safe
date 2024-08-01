@@ -14,7 +14,7 @@ declare var gapi: any;
 })
 export class UserAuthFormComponent implements OnInit{
   authForm: FormGroup;
-  type: 'sign-in' | 'sign-up' = 'sign-in';
+  type: 'sign-in' | 'sign-up' = 'sign-up';
   passwordVisible: boolean = false;
 
   constructor(

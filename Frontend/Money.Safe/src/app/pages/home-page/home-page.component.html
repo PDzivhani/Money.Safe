@@ -1,18 +1,109 @@
-<div class="home">
-    <main>
-      <h1>Welcome, {{ username }}!</h1>
-      <p>Explore the features below:</p>
-      <div class="features">
-        <div>
-          <a routerLink="/balance">View Your Balance</a>
+<div class="container">
+  <div class="welcome-header">
+    <h1>Welcome, {{ username }}!</h1> 
+  </div>
+  <div class="card-container">
+    <!-- Income Card -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon income-icon"><i class="fa-solid fa-registered"></i></span>
+        <h2>Income</h2>
+      </div>
+      <hr>
+      <div class="income-details">
+        <div class="month">
+          <h3>Last Few Months</h3>
+          <ul>
+            <li *ngFor="let monthIncome of lastMonthsIncome">{{ monthIncome }}</li>
+          </ul>
         </div>
-        <div>
-          <a routerLink="/transactions">Manage Transactions</a>
+        <div class="month">
+          <h3>Current Month</h3>
+          <p>{{ currentMonthIncome }}</p>
         </div>
-        <div>
-          <a routerLink="/calculator">Use the Calculator</a>
+        <button class="button" (click)="onIncome()">View</button> 
+      </div>
+    </div>
+
+    <!-- Expense Card -->   
+    <div class="card">
+      <div class="card-header">
+        <span class="icon expense-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+          <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+          <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+        </svg></span>
+        <h2>Expense</h2>
+      </div>
+      <hr>
+      <div class="income-details">
+        <div class="month">
+          <h3>Last Few Months</h3>
+          <ul>
+            <li *ngFor="let monthExpense of lastMonthsExpense">{{ monthExpense }}</li>
+          </ul>
+        </div>
+        <div class="month">
+          <h3>Current Month</h3>
+          <p>{{ currentMonthExpense }}</p>
         </div>
       </div>
-    </main>
+      <button class="button" (click)="onExpense()">View</button> 
+    </div>
+
+    <!-- To Do Transactions -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon todo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+          <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
+          <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0M7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0"/>
+        </svg></span>
+        <h2>To Do Transactions</h2>
+      </div>
+      <hr>
+      <ul>
+        <li *ngFor="let item of todoTransactions">
+          <span class="transaction-status">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hourglass" viewBox="0 0 16 16">
+              <path d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1-.5-.5m2.5.5v1a3.5 3.5 0 0 0 1.989 3.158c.533.256 1.011.791 1.011 1.491v.702c0 .7-.478 1.235-1.011 1.491A3.5 3.5 0 0 0 4.5 13v1h7v-1a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351v-.702c0-.7.478-1.235 1.011-1.491A3.5 3.5 0 0 0 11.5 3V2z"/>
+            </svg>
+          </span>
+          <span class="transaction-details">{{ item.description }}</span>
+        </li>
+      </ul>
+      <button class="button" (click)="onTodo()">View</button> 
+    </div>
+
+    <!-- Total -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon total-icon"><i class="fa-solid fa-registered"></i></span>
+        <h2>Total Income</h2>
+      </div>
+      <hr>
+      <div class="total-details">
+        <div class="total-item">
+          <span class="icon income-icon"><i class="fa-solid fa-registered"></i></span>
+          <h3>Current Month Income</h3>
+          <p>{{ totalCurrentMonthIncome | currency }}</p>
+        </div>
+        <div class="total-item">
+          <span class="icon expense-icon"> <span class="icon expense-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+          </svg></span>
+          </span>
+          <h3>Current Month Expense</h3>
+          <p>{{ totalCurrentMonthExpense | currency }}</p>
+        </div>
+        <hr class="total-line">
+        <div class="total-item">
+          <span class="icon trans-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet2" viewBox="0 0 16 16">
+            <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z"/>
+          </svg></span>
+          <h3>Current Month Savings</h3>
+          <p>{{ currentMonthSavings | currency }}</p>
+        </div>
+      </div>
+    </div>
   </div>
-  
+</div>

@@ -16,7 +16,7 @@ export class AppComponent {
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.showBottomNav = !['/landing', '/signin', 'signup'].includes(event.urlAfterRedirects);
+        this.showBottomNav = !['', '', ''].includes(event.urlAfterRedirects);
       }
     });
   }

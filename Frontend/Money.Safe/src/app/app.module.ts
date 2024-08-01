@@ -14,6 +14,8 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { UserAuthFormComponent } from './components/user-auth-form/user-auth-form.component';
 import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
+import { ExpensesComponent } from './components/expenses/expenses.component';
+import { ToDoComponent } from './components/to-do/to-do.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { TransactionsComponent } from './components/transactions/transactions.co
     SideNavComponent,
     UserAuthFormComponent,
     ToolBarComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    ExpensesComponent,
+    ToDoComponent
   ],
   imports: [
     BrowserModule,

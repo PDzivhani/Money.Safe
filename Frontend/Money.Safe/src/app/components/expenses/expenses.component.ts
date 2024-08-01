@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TransactionsService } from 'src/app/services/transactions.service';
 
 @Component({
-  selector: 'app-transactions',
-  templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.scss']
+  selector: 'app-expenses',
+  templateUrl: './expenses.component.html',
+  styleUrls: ['./expenses.component.scss']
 })
-export class TransactionsComponent {
-  todoForm: any;
+export class ExpensesComponent {
+  expenseForm: any;
   selectedMonth: string;
   expenses: { month: string, expenseAmount: number }[] = [
     { month: 'January', expenseAmount: 1500 },
@@ -18,16 +17,16 @@ export class TransactionsComponent {
   ];
   monthSelected: boolean = false;
   januaryExpense: any[] = [
-    { expenseType: 'Recharge', expenseAmount: 1000 },
-    { expenseType: 'Light Bills', expenseAmount: 500 },
+    { expenseType: 'Rent', expenseAmount: 1000 },
+    { expenseType: 'Groceries', expenseAmount: 500},
   ];
   februaryExpense: any[] = [
-    { expenseType: 'Essentials', expenseAmount: 200 },
-    { expenseType: 'Light Bills', expenseAmount: 400 }
+    { expenseType: 'Utilities', expenseAmount: 200 },
+    { expenseType: 'Groceries', expenseAmount: 400 }
   ];
   marchExpense: any[] = [
-    { expenseType: 'Recharge', expenseAmount: 1100 },
-    { expenseType: 'Essentials', expenseAmount: 250 }
+    { expenseType: 'Rent', expenseAmount: 1100 },
+    { expenseType: 'Utilities', expenseAmount: 250 }
   ];
 
   constructor(private fb: FormBuilder, private router: Router) {
@@ -35,7 +34,7 @@ export class TransactionsComponent {
   }
 
   ngOnInit(): void {
-    this.todoForm = this.fb.group({
+    this.expenseForm = this.fb.group({
       month: ['', Validators.required],
       expenseType: ['', Validators.required],
       expenseAmount: ['', Validators.required]
@@ -43,10 +42,10 @@ export class TransactionsComponent {
   }
 
   onSubmitExpense() {
-    if (this.todoForm.valid) {
-      const newExpense = this.todoForm.value;
+    if (this.expenseForm.valid) {
+      const newExpense = this.expenseForm.value;
       this.getFilteredExpenses().push(newExpense);
-      this.todoForm.reset();
+      this.expenseForm.reset();
     }
   }
 
@@ -74,8 +73,8 @@ export class TransactionsComponent {
   }
 
   onSave() {
-    if (this.todoForm.valid) {
-      this.todoForm.reset({ month: this.selectedMonth });
+    if (this.expenseForm.valid) {
+      this.expenseForm.reset({ month: this.selectedMonth });
       this.getFilteredExpenses();
     }
   }
@@ -86,5 +85,5 @@ export class TransactionsComponent {
 
   onBack() {
     this.router.navigate(['/home']);
-  }
+  } 
 }

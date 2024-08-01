@@ -15,12 +15,12 @@ export class SideNavComponent {
   }
  
   onProfile(){
-    this.router.navigate(['/budget-planner/profile']);
+    this.router.navigate(['/profile']);
   }
   onHistory(){
-    this.router.navigate(['/budget-planner/history']);
+    this.router.navigate(['/transactions']);
   }
   onLogout(){
-    this.router.navigate(['/budget-planner/login']);
+    this.router.navigate(['/signin']);
   }
 }

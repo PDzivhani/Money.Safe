@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TransactionsService } from 'src/app/services/transactions.service';
 
 @Component({
-  selector: 'app-transactions',
-  templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.scss']
+  selector: 'app-to-do',
+  templateUrl: './to-do.component.html',
+  styleUrls: ['./to-do.component.scss']
 })
-export class TransactionsComponent {
+export class ToDoComponent implements OnInit{
   todoForm: any;
-  selectedMonth: string;
+  selectedMonth: any;
   expenses: { month: string, expenseAmount: number }[] = [
     { month: 'January', expenseAmount: 1500 },
     { month: 'February', expenseAmount: 2000 },
@@ -21,17 +20,20 @@ export class TransactionsComponent {
     { expenseType: 'Recharge', expenseAmount: 1000 },
     { expenseType: 'Light Bills', expenseAmount: 500 },
   ];
+
   februaryExpense: any[] = [
     { expenseType: 'Essentials', expenseAmount: 200 },
     { expenseType: 'Light Bills', expenseAmount: 400 }
   ];
+
   marchExpense: any[] = [
     { expenseType: 'Recharge', expenseAmount: 1100 },
     { expenseType: 'Essentials', expenseAmount: 250 }
   ];
-
   constructor(private fb: FormBuilder, private router: Router) {
-    this.selectedMonth = new Date().toLocaleString('default', { month: 'long' });
+    const currentDate = new Date();
+    const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
+    this.selectedMonth = currentMonth;
   }
 
   ngOnInit(): void {
@@ -45,8 +47,21 @@ export class TransactionsComponent {
   onSubmitExpense() {
     if (this.todoForm.valid) {
       const newExpense = this.todoForm.value;
-      this.getFilteredExpenses().push(newExpense);
+      switch (this.selectedMonth) {
+        case 'January':
+          this.januaryExpense.push(newExpense);
+          break;
+        case 'February':
+          this.februaryExpense.push(newExpense);
+          break;
+        case 'March':
+          this.marchExpense.push(newExpense);
+          break;
+        default:
+          break;
+      }
       this.todoForm.reset();
+      this.todoForm.patchValue({ month: '', expenseType: '', expenseAmount: '' });
     }
   }
 
@@ -57,7 +72,33 @@ export class TransactionsComponent {
   }
 
   getFilteredExpenses() {
+    let filteredExpense: any[] = [];
     switch (this.selectedMonth) {
+      case 'January':
+        filteredExpense = [...this.januaryExpense];
+        break;
+      case 'February':
+        filteredExpense = [...this.februaryExpense];
+        break;
+      case 'March':
+        filteredExpense = [...this.marchExpense];
+        break;
+      default:
+        break;
+    }
+    return filteredExpense;
+  }
+
+  calculateTotalExpense(month: string): number {
+    let totalExpense = 0;
+    for (const income of this.gettodoFormonth(month)) {
+      totalExpense += income.expenseAmount;
+    }
+    return totalExpense;
+  }
+
+  gettodoFormonth(month: string): any[] {
+    switch (month) {
       case 'January':
         return this.januaryExpense;
       case 'February':
@@ -69,12 +110,9 @@ export class TransactionsComponent {
     }
   }
 
-  calculateTotalExpense(month: string): number {
-    return this.getFilteredExpenses().reduce((acc, curr) => acc + curr.expenseAmount, 0);
-  }
-
   onSave() {
     if (this.todoForm.valid) {
+      const incomeData = this.todoForm.value;
       this.todoForm.reset({ month: this.selectedMonth });
       this.getFilteredExpenses();
     }
@@ -85,6 +123,10 @@ export class TransactionsComponent {
   }
 
   onBack() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/budget-planner/dashboard']);
+  }
+
+  toggleSelection(expense: any) {
+    expense.selected = !expense.selected;
   }
 }
