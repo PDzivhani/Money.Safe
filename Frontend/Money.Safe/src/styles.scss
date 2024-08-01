@@ -1,0 +1,130 @@
+/* ===== Google fonts ==== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+
+
+/* ==== CSS VARIABLES ====== */
+:root{
+    --header-height:3rem;
+
+/* === Colors ==== */
+/* Change Favorite color */
+ --hue-color: 340; /* Purple 250 , Green 142 , Blue 230 , Pink 340 */
+
+/* HSL color mode */
+--first-color: hsl(var(--hue-color), 69%, 61%);
+--first-color-second:hsl(var(--hue-color), 69%, 61%) ;
+--first-color-alt: hsl(var(--hue-color), 57%, 53%);
+--fist-color-lighter:hsl(var(--hue-color), 92%, 85%) ;
+--title-color:hsl(var(--hue-color), 8%, 15%) ;
+--text-color: hsl(var(--hue-color), 8%, 45%);
+--text-color-light: hsl(var(--hue-color), 8%, 65%);
+--input-color: hsl(var(--hue-color), 70%, 96%);
+--body-color: hsl(var(--hue-color), 60%, 99%);
+--container-color: #fff;
+--scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
+--scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
+
+/* ==== Font and typography ==== */
+--body-font:'Poppins', sans-serif;
+
+/* .5rem = 8px, 1rem = 16px, 1.5rem = 24px */
+--big-font-size: 2rem;
+--h1-font-size: 1.5rem;
+--h2-font-size: 1.25;
+--h3-font-size: 1.125rem;
+--normal-font-size: .938rem;
+--small-font-size: .813rem;
+--smaller-font-size: .75rem;
+
+/* ====== Font weight ======== */
+--font-medium: 500;
+--font-semi-bold: 600;
+
+/* ====== Margin Bottom ====== */
+/* .25rem = 4px, .5rem = 8px, .75rem = 12px  */
+--mb-0-25: .25rem;
+--mb-0-5: .5rem;
+--mb-0-75: .75rem;
+--mb-1: 1rem;
+--mb-1-5: 1.5rem;
+--mb-2: 2rem;
+--mb-2-5: 2.5rem;
+--mb-3: 3rem;
+
+/* ====== z index ===== */
+--z-tooltip: 10;
+--z-fixed: 100;
+--z-modal: 1000;
+
+}
+
+/* ================== BASE ================== */
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    // background-color: #E0C4EAff;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    margin: 0 0 var(--header-height) 0;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+    color: var(--text-color) ;
+}
+
+h1,h2,h3,h4{
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+}
+
+ul{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+/* SCSS HEX */
+$white-smoke: #F4F4F4ff;
+$white: #FEFEFEff;
+$white-smoke-2: #F3F3F3ff;
+$black: #000000ff;
+$thistle: #E0C4EAff;
+
+/* SCSS HSL */
+$white-smoke: hsla(0, 0%, 96%, 1);
+$white: hsla(0, 0%, 100%, 1);
+$white-smoke-2: hsla(0, 0%, 95%, 1);
+$black: hsla(0, 0%, 0%, 1);
+$thistle: hsla(284, 47%, 84%, 1);
+
+/* SCSS RGB */
+$white-smoke: rgba(244, 244, 244, 1);
+$white: rgba(254, 254, 254, 1);
+$white-smoke-2: rgba(243, 243, 243, 1);
+$black: rgba(0, 0, 0, 1);
+$thistle: rgba(224, 196, 234, 1);
+
+/* SCSS Gradient */
+$gradient-top: linear-gradient(0deg, #F4F4F4ff, #FEFEFEff, #F3F3F3ff, #000000ff, #E0C4EAff);
+$gradient-right: linear-gradient(90deg, #F4F4F4ff, #FEFEFEff, #F3F3F3ff, #000000ff, #E0C4EAff);
+$gradient-bottom: linear-gradient(180deg, #F4F4F4ff, #FEFEFEff, #F3F3F3ff, #000000ff, #E0C4EAff);
+$gradient-left: linear-gradient(270deg, #F4F4F4ff, #FEFEFEff, #F3F3F3ff, #000000ff, #E0C4EAff);
+$gradient-top-right: linear-gradient(45deg, #F4F4F4ff, #FEFEFEff, #F3F3F3ff, #000000ff, #E0C4EAff);
+$gradient-bottom-right: linear-gradient(135deg, #F4F4F4ff, #FEFEFEff, #F3F3F3ff, #000000ff, #E0C4EAff);
+$gradient-top-left: linear-gradient(225deg, #F4F4F4ff, #FEFEFEff, #F3F3F3ff, #000000ff, #E0C4EAff);
+$gradient-bottom-left: linear-gradient(315deg, #F4F4F4ff, #FEFEFEff, #F3F3F3ff, #000000ff, #E0C4EAff);
+$gradient-radial: radial-gradient(#F4F4F4ff, #FEFEFEff, #F3F3F3ff, #000000ff, #E0C4EAff);

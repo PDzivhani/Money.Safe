@@ -1,0 +1,58 @@
+nav {
+    width: 100vw;
+    height: 6rem;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+  
+    a {
+        text-decoration: none;
+    }
+  
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: hsla(284, 47%, 84%, 1);
+        height: 100%;
+        border-radius: 3rem;
+        padding: .5rem;
+  
+        .tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: rgb(218, 218, 218);
+            height: 100%;
+            padding: .4rem;
+            transition: .5s ease-in-out;
+  
+            svg {
+                width: 32px; // Adjust the size as needed
+                height: 32px;
+            }
+  
+            p {
+                font-size: .8rem; // Adjust the font size as needed
+                margin: 0; // Ensure there's no margin around the text
+            }
+  
+            &:hover {
+                color: white;
+                cursor: pointer;
+                background: #2b1847;
+                border-radius: 3rem;
+                transform: scale(1.01);
+            }
+  
+            &.active {
+                background: rgb(162, 121, 177);
+                border-radius: 3rem;
+            }
+        }
+    }
+  }
+  

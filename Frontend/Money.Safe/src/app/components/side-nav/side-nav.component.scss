@@ -1,0 +1,64 @@
+.toggle-button-row {
+    position: fixed;
+    top: 20px;
+    right: 20px; /* Move toggle button to the right */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .toggle-button-row svg {
+    font-size: 24px;
+    color: #000000ff;
+  }
+  
+  .slide-out-panel {
+    position: fixed;
+    top: 0;
+    right: 0; /* Change to right */
+    bottom: 0;
+    width: 250px;
+    background: linear-gradient(0deg, #F4F4F4ff, #FEFEFEff, #F3F3F3ff, #E0C4EAff);
+    transition: transform 0.3s ease-out;
+    z-index: 1000;
+    border-top-left-radius: 20px; /* Change to left */
+    border-bottom-left-radius: 20px; /* Change to left */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .slide-out-panel.slide-out {
+    transform: translateX(100%); /* Adjust transform direction */
+  }
+  
+  .slide-out-content {
+    margin-top: 80px;
+    padding: 20px;
+  }
+  
+  .edit-col {
+    color: #000;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #000000;
+    margin-bottom: 10px;
+  }
+  
+  .edit-col:hover {
+    color: #008080;
+  }
+  
+  .nav {
+    text-align: center;
+    justify-content: center;
+    background-color: #87dcdc;
+  }
+  

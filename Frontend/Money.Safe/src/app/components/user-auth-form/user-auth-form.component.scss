@@ -1,0 +1,48 @@
+.h-cover {
+    height: 100vh;
+  }
+  
+  .input-box {
+    width: 80%;
+    margin-left: 34px;
+    margin-top: 12px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .btn-dark{
+      
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  
+    .register{
+      width: 80%;
+    }
+  }
+  
+  .relative {
+    position: relative;
+  }
+  
+  .fa-eye {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+//   .fi-rr-eye-crossed {
+//     /* Add styling for crossed eye icon if needed */
+//   }
+  
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

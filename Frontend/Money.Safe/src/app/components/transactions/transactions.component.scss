@@ -1,0 +1,25 @@
+.transaction-management {
+    .transactions {
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        border-bottom: 1px solid #ddd;
+        padding: 0.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        button {
+          background-color: #f44336;
+          color: #fff;
+          border: none;
+          padding: 0.5rem;
+          cursor: pointer;
+          &:hover {
+            background-color: #d32f2f;
+          }
+        }
+      }
+    }
+  }
+  

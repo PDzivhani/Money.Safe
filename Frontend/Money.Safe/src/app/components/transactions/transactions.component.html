@@ -1,0 +1,14 @@
+<!-- transaction-management.component.html -->
+<div class="transaction-management">
+    <h2>Transaction Management</h2>
+    <div class="transactions">
+      <h3>Transactions</h3>
+      <ul>
+        <li *ngFor="let transaction of transactions">
+          {{ transaction.description }} - {{ transaction.amount | currency }}
+          <button (click)="deleteTransaction(transaction.id)">Delete</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
