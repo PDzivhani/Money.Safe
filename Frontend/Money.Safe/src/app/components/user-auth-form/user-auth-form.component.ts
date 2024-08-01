@@ -82,10 +82,10 @@ export class UserAuthFormComponent implements OnInit{
 
       this.authService.googleAuth(idToken).subscribe(
         (        data: any) => this.authService.handleAuthSuccess(data),
-        (        error: any) => this.authService.handleAuthError(error, 'Google sign-in failed')
-      );
+        (        (        _error: any) => this.toastr.error('Google sign in failed. Please try again.')
+      ))
     }).catch((error: any) => {
-      this.authService.handleAuthError(error, 'Google sign-in failed');
+      this.toastr.error('Google sign in failed. Please try again.')
       console.error(error);
     });
   }
