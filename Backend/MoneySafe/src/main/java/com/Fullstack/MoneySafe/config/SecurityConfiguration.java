@@ -29,8 +29,8 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/v1/auth/**").permitAll()
-//                        .requestMatchers("/api/v1/cloudinary").permitAll()
-//                        .requestMatchers("/api/preferences/**").permitAll()
+//                        .requestMatchers("/", "/login", "/error").permitAll()
+                        .requestMatchers("/api/v1/income/**").permitAll()
 //                        .requestMatchers("/api/payment-methods/**").permitAll()
 //                        .requestMatchers("/api/transactions").permitAll()
 //                        .requestMatchers("/api/v1/paypal/**").permitAll()
@@ -46,6 +46,8 @@ public class SecurityConfiguration {
 
         return http.build();
     }
+
+
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {

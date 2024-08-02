@@ -27,6 +27,12 @@ public class UserServiceImpl implements UserDetailsService, UserServiceInit {
         return repository.findByEmail(email);
     }
 
+    @Override
+    // Method to find a user by email
+    public User findByGEmail(String email) {
+        return repository.findByGEmail(email);
+    }
+
     // Method to get a user by their ID
     public User getUserById(Long id) {
         Optional<User> optional = repository.findById(id);

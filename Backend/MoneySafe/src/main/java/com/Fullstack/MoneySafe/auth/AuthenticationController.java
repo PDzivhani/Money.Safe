@@ -2,17 +2,22 @@ package com.Fullstack.MoneySafe.auth;
 
 import com.Fullstack.MoneySafe.config.JwtService;
 import com.Fullstack.MoneySafe.entity.User;
+import com.Fullstack.MoneySafe.repository.UserRepository;
 import com.Fullstack.MoneySafe.services.UserServiceImpl;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -26,7 +31,41 @@ public class AuthenticationController {
     private final JwtService jwtService;
     private final UserServiceImpl userService;
 
+    @Autowired
+    private UserRepository userRepository;
 
+    @Autowired
+    private GoogleAuthService googleAuthService;
+
+
+    @PostMapping("/google")
+    public ResponseEntity<?> googleLogin(@RequestBody Map<String, String> request) {
+        String idTokenString = request.get("idToken");
+
+        try {
+            GoogleIdToken.Payload payload = googleAuthService.verifyToken(idTokenString);
+            String email = payload.getEmail();
+            User user = userRepository.findByGEmail(email);
+
+            if (user == null) {
+                // Create a new user if not exists
+                user = new User();
+                user.setEmail(email);
+                user.setPassword(passwordEncoder.encode("google_oauth_user"));
+                userRepository.save(user);
+            }
+
+            // Generate JWT token
+            String token = jwtService.generateTokenFromUsername(user.getEmail());
+            Map<String, String> response = new HashMap<>();
+            response.put("token", token);
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Invalid ID token.");
+        }
+    }
 
     /**
      * Registers a new user.
@@ -89,12 +128,18 @@ public class AuthenticationController {
 
     /**
      * Finds a user by email.
+     *
      * @param email the email of the user
      * @return the user with the specified email
      */
     @GetMapping("/email/{email}")
     public Optional<User> findByEmail(@PathVariable String email) {
         return userService.findByEmail(email);
+    }
+
+    @GetMapping("/google/{email}")
+    public User findByGEmail(@PathVariable String email) {
+        return userService.findByGEmail(email);
     }
 
 

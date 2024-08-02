@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface UserServiceInit {
     Optional<User> findByEmail(String email);
     Optional<User> findById(Long id);
+    User findByGEmail(String email);
     List<User> findAll();
     void save(User user);
     void delete(User user);

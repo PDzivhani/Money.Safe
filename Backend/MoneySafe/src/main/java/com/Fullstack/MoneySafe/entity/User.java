@@ -44,11 +44,13 @@ public class User implements UserDetails {
     @NotBlank(message = "Password is required")
     private String password;
 
-    @Transient
-    private String confirmPassword;
+//    @Transient
+//    private String confirmPassword;
     private String resetToken;
 
     private String image;
+
+    private String GEmail;
 
 
     @Override
