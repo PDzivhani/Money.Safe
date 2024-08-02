@@ -52,7 +52,7 @@
   button.button {
     align-self: flex-start;
     padding: 10px 20px;
-    background-color: #007bff;
+    background: linear-gradient(135deg, rgb(191, 124, 215), rgb(179, 137, 194));
     color: white;
     border: none;
     border-radius: 5px;
@@ -61,7 +61,7 @@
   }
   
   button.button:hover {
-    background-color: #0056b3;
+    background-color:  #E0C4EAff;
   }
 
   .transaction-status, .transaction-details {

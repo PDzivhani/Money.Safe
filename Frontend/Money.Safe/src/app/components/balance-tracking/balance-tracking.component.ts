@@ -1,35 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BalanceTrackingService } from 'src/app/services/balance-tracking.service';
-
+import { ToastComponent } from '../toast/toast.component';
 
 @Component({
   selector: 'app-balance-tracking',
   templateUrl: './balance-tracking.component.html',
   styleUrls: ['./balance-tracking.component.scss']
 })
-export class BalanceTrackingComponent implements OnInit{
+export class BalanceTrackingComponent implements OnInit {
+  @ViewChild(ToastComponent) toast!: ToastComponent;
+
   incomeForm: any;
   selectedMonth: any;
-  januaryIncomes: any[] = [
-    { source: 'Salary', amount: 5000, investments: '401(k)' },
-    { source: 'Freelancing', amount: 1000, investments: 'Stocks' },
-  ];
-  februaryIncomes: any[] = [
-    { source: 'Salary', amount: 5500, investments: '401(k)' },
-    { source: 'Rental Income', amount: 700, investments: 'Real Estate' },
-  ];
-  marchIncomes: any[] = [
-    { source: 'Salary', amount: 5200, investments: '401(k)' },
-    { source: 'Freelancing', amount: 1200, investments: 'Stocks' },
-    { source: 'Rental Income', amount: 600, investments: 'Real Estate' },
-  ];
-  monthSelected:boolean=false;
-  constructor(public fb: FormBuilder,public router:Router) { 
+  monthSelected: boolean = false;
+  incomes: any[] = [];
+
+  constructor(
+    public fb: FormBuilder,
+    public router: Router,
+    private balanceTrackingService: BalanceTrackingService
+  ) { 
     const currentDate = new Date();
     this.selectedMonth = currentDate.toLocaleString('default', { month: 'long' });
   }
+
   ngOnInit(): void {
     this.incomeForm = this.fb.group({
       month: ['', Validators.required],
@@ -37,75 +33,49 @@ export class BalanceTrackingComponent implements OnInit{
       amount: ['', Validators.required],
       investments: ['', Validators.required]
     });
+    this.getFilteredIncomes();
   }
 
   onChange(event: any) {
-    this.selectedMonth = event.target.value
-    this.monthSelected=true;
+    this.selectedMonth = event.target.value;
+    this.monthSelected = true;
     this.getFilteredIncomes();
   }
 
   calculateTotalIncome(month: string): number {
     let totalIncome = 0;
-    for (const income of this.getIncomesForMonth(month)) {
+    for (const income of this.incomes) {
       totalIncome += income.amount;
     }
     return totalIncome;
   }
 
-  getIncomesForMonth(month: string): any[] {
-    switch (month) {
-      case 'January':
-        return this.januaryIncomes;
-      case 'February':
-        return this.februaryIncomes;
-      case 'March':
-        return this.marchIncomes;
-      default:
-        return [];
+  getFilteredIncomes() {
+    if (this.selectedMonth) {
+      this.balanceTrackingService.getIncomesByMonth(this.selectedMonth).subscribe((data: any[]) => {
+        this.incomes = data;
+      });
+    } else {
+      this.incomes = [];
     }
   }
 
-  getFilteredIncomes() {
-    let filteredIncomes: any[] = [];
-    switch (this.selectedMonth) {
-      case 'January':
-        filteredIncomes = [...this.januaryIncomes];
-        break;
-      case 'February':
-        filteredIncomes = [...this.februaryIncomes];
-        break;
-      case 'March':
-        filteredIncomes = [...this.marchIncomes];
-        break;
-      default:
-        break;
-    }
-    return filteredIncomes;
-  }
   onSubmit() {
     if (this.incomeForm.valid) {
       const newIncome = this.incomeForm.value;
-      switch (this.selectedMonth) {
-        case 'January':
-          this.januaryIncomes.push(newIncome);
-          break;
-        case 'February':
-          this.februaryIncomes.push(newIncome);
-          break;
-        case 'March':
-          this.marchIncomes.push(newIncome);
-          break;
-        default:
-          break;
-      }
-      this.incomeForm.reset();
-      this.incomeForm.patchValue({ month: '', source: '', amount: '', investments: '' });
+      newIncome.month = this.selectedMonth;
+      this.balanceTrackingService.addIncome(newIncome).subscribe(() => {
+        this.getFilteredIncomes();
+        this.incomeForm.reset();
+      });
     }
   }
 
   saveForm() {
-    console.log("Form saved!");
+    this.toast.showToast('Income saved!');
+    setTimeout(() => {
+      this.router.navigate(['/home']);
+    }, 3000); // Wait for the toast to disappear before navigating
   }
 
   onBack() {

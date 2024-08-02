@@ -17,6 +17,7 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { ExpensesComponent } from './components/expenses/expenses.component';
 import { ToDoComponent } from './components/to-do/to-do.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     TransactionsComponent,
     ExpensesComponent,
     ToDoComponent,
-    ProfileComponent
+    ProfileComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

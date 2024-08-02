@@ -1,28 +1,23 @@
 <div class="container">
-    <h1>Welcome To Balance Me</h1>
-    <div class="slide-container">
-        <div class="slide fade" *ngFor="let slide of slides; let i = index" [ngStyle]="{'display': i === currentSlide ? 'block' : 'none'}">
-          <img [src]="slide.imageUrl" [alt]="slide.alt">
-        </div>
-      
-        <!-- <a href="#" class="prev" title="Previous" (click)="prevSlide()">&#10094;</a>
-        <a href="#" class="next" title="Next" (click)="nextSlide()">&#10095;</a> -->
+  <div class="slide-container">
+    <div class="slide fade" *ngFor="let slide of slides; let i = index" [ngStyle]="{'display': i === currentSlide ? 'flex' : 'none'}">
+      <div class="slide-content">
+        <h3>{{slide.title}}</h3>
+        <img [src]="slide.imageUrl" [alt]="slide.alt">
+        <p>{{slide.description}}</p>
       </div>
-      
-      <!-- <div class="dots-container">
-        <span class="dot" *ngFor="let dot of dots; let i = index" [ngClass]="{'active': i === currentSlide}" (click)="currentSlide = i"></span>
-      </div> -->
-      
-    <div class="header">
-        <div class="toggle-wrapper" (click)="slideToRegister()">
-            <span class="toggle-text">Slide to get started</span>
-            <div class="toggle-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right icon" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708"/>
-                    <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708"/>
-                  </svg>
-            </div>
-          </div>          
     </div>
+  </div>
 
+  <div class="header">
+    <div class="toggle-wrapper" (click)="slideToRegister()">
+      <span class="toggle-text">Slide to get started</span>
+      <div class="toggle-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right icon" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708"/>
+          <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708"/>
+        </svg>
+      </div>
+    </div>
+  </div>
 </div>

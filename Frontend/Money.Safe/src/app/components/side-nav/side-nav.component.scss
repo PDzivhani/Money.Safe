@@ -25,7 +25,7 @@
     right: 0; /* Change to right */
     bottom: 0;
     width: 250px;
-    background: linear-gradient(0deg, #F4F4F4ff, #FEFEFEff, #F3F3F3ff, #E0C4EAff);
+    background:  #E0C4EAff;
     transition: transform 0.3s ease-out;
     z-index: 1000;
     border-top-left-radius: 20px; /* Change to left */
@@ -43,22 +43,22 @@
   }
   
   .edit-col {
-    color: #000;
+    color: white;
     cursor: pointer;
     font-size: 18px;
     padding: 10px;
     border-radius: 10px;
-    background-color: #000000;
+    background-color:rgb(191, 124, 215);
     margin-bottom: 10px;
   }
   
   .edit-col:hover {
-    color: #008080;
+    color: #E0C4EAff;
   }
   
   .nav {
     text-align: center;
     justify-content: center;
-    background-color: #87dcdc;
+    background-color: #E0C4EAff;
   }
   

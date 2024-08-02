@@ -21,6 +21,6 @@ export class SideNavComponent {
     this.router.navigate(['/transactions']);
   }
   onLogout(){
-    this.router.navigate(['/signin']);
+    this.router.navigate(['']);
   }
 }

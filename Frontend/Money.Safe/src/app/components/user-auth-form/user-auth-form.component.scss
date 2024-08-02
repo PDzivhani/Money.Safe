@@ -18,14 +18,14 @@ body {
   padding: 15px;
   border: none;
   border-radius: 6px;
-  background: linear-gradient(135deg, #008080, #80ced6);
+  background: linear-gradient(135deg, rgb(191, 124, 215), rgb(179, 137, 194));
   color: #ffffff;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background: #67bbc6;
+  background:  #E0C4EAff;
 }
 
 input[type="email"],
@@ -36,7 +36,7 @@ input[type="text"] {
   margin-left: 34px;
   margin-top: 12px;
   border-radius: 6px;
-  border: 1px solid #008080;
+  border: 1px solid rgb(191, 124, 215);
   background-color: #f5f5f5;
 }
 

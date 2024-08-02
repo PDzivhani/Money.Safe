@@ -2,24 +2,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BalanceTrackingService {
-  private apiUrl = 'API_ENDPOINT/balance-tracking';
+  private apiUrl = `${environment.apiBaseUrl}/income`;
 
   constructor(private http: HttpClient) {}
 
-  getBalance(): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/balance`);
+  getIncomesByMonth(month: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${month}`);
   }
 
-  getTransactions(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/transactions`);
+  addIncome(income: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, income);
   }
 
-  addTransaction(transaction: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/transactions`, transaction);
+  deleteIncome(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
