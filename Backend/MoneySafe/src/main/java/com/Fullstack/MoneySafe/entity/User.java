@@ -31,8 +31,8 @@ public class User implements UserDetails {
     @NotBlank(message = "Last name is required")
     private String lastName;
 
-    @NotBlank(message = "Phone number is required")
-    private String phoneNumber;
+//    @NotBlank(message = "Phone number is required")
+//    private String phoneNumber;
 
 
     @Email(message = "Email should be valid")

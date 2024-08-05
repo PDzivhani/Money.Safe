@@ -24,12 +24,12 @@ public class RegisterRequest {
      */
     @NotBlank(message = "Last name is required")
     private String lastName;
-    /**
-     * The phone number of the user.
-     * Should not be blank.
-     */
-    @NotBlank(message = "Phone number is required")
-    private String phoneNumber;
+//    /**
+//     * The phone number of the user.
+//     * Should not be blank.
+//     */
+//    @NotBlank(message = "Phone number is required")
+//    private String phoneNumber;
 
     /**
      * The email of the user.
@@ -47,12 +47,12 @@ public class RegisterRequest {
             message = "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character")
     @NotBlank(message = "Password is required")
     private String password;
-    /**
-     * The confirmation password of the user.
-     * Should match the password and not be blank.
-     */
-    @NotBlank(message = "Confirm password is required")
-    private String confirmPassword;
+//    /**
+//     * The confirmation password of the user.
+//     * Should match the password and not be blank.
+//     */
+//    @NotBlank(message = "Confirm password is required")
+//    private String confirmPassword;
     /**
      * The profile image of the user.
      * Optional field.

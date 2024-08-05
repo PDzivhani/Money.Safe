@@ -156,7 +156,7 @@ public class AuthenticationController {
 
             user.setFirstName(userDetails.getFirstName());
             user.setLastName(userDetails.getLastName());
-            user.setPhoneNumber(userDetails.getPhoneNumber());
+//            user.setPhoneNumber(userDetails.getPhoneNumber());
             user.setEmail(userDetails.getEmail());
             user.setImage(userDetails.getImage());
 
