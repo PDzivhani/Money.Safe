@@ -73,9 +73,6 @@ export class BalanceTrackingComponent implements OnInit {
 
   saveForm() {
     this.toast.showToast('Income saved!');
-    setTimeout(() => {
-      this.router.navigate(['/home']);
-    }, 3000); // Wait for the toast to disappear before navigating
   }
 
   onBack() {
