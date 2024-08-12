@@ -11,15 +11,12 @@
                     <option value="March">March</option>
                 </select>
             </div>
-            <div class="form-group">
-            </div>
             <div class="total-expense">
-                Total expense for {{ selectedMonth }}: ${{ calculateTotalExpense(selectedMonth) }}
+                Total expense for {{ selectedMonth }}: ${{ calculateTotalExpense() }}
             </div>
             <div class="form-group">
                 <label for="expenseType">Expense Type:</label>
-                <select formControlName="expenseType" id="expenseType" class="form-control"
-                    [class.disabled-dropdown]="!monthSelected">
+                <select formControlName="expenseType" id="expenseType" class="form-control" [class.disabled-dropdown]="!monthSelected">
                     <option value="" disabled>Select Expense Type</option>
                     <option value="Rent">Rent</option>
                     <option value="Groceries">Groceries</option>
@@ -31,8 +28,7 @@
                 <input type="number" formControlName="expenseAmount" id="expenseAmount" class="form-control"
                     placeholder="Enter amount" [class.disabled-dropdown]="!monthSelected">
             </div>
-            <button type="submit" class="btn btn-primary" (click)="onSubmitExpense()"
-                [class.disabled-dropdown]="!monthSelected">Add Expense</button>
+            <button type="submit" class="btn btn-primary" [class.disabled-dropdown]="!monthSelected">Add Expense</button>
         </form>
         <hr>
         <h3>Expense List - {{ selectedMonth }}</h3>
@@ -44,7 +40,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let expense of getFilteredExpenses()">
+                <tr *ngFor="let expense of expenses">
                     <td>{{ expense.expenseType }}</td>
                     <td>{{ expense.expenseAmount }}</td>
                 </tr>
