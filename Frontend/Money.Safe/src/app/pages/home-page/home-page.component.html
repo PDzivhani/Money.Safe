@@ -4,6 +4,39 @@
     <h1>Welcome, {{ username }}!</h1> 
   </div>
   <div class="card-container">
+     <!-- Total -->
+     <div class="card">
+      <div class="card-header">
+        <span class="icon total-icon"><i class="fa-solid fa-registered"></i></span>
+        <h2>Total Income</h2>
+      </div>
+      <hr>
+      <div class="total-details">
+        <div class="total-item">
+          <span class="icon income-icon"><i class="fa-solid fa-registered"></i></span>
+          <h3>Current Month Income</h3>
+          <p>{{ totalCurrentMonthIncome | currency:'R'  }}</p>
+        </div>
+        <div class="total-item">
+          <span class="icon expense-icon"> <span class="icon expense-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+          </svg></span>
+          </span>
+          <h3>Current Month Expense</h3>
+          <p>{{ totalCurrentMonthExpense | currency:'R' }}</p>
+        </div>
+        <hr class="total-line">
+        <div class="total-item">
+          <span class="icon trans-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet2" viewBox="0 0 16 16">
+            <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z"/>
+          </svg></span>
+          <h3>Current Month Savings</h3>
+          <p>{{ currentMonthSavings | currency:'R' }}</p>
+        </div>
+      </div>
+    </div>
+
     <!-- Income Card -->
     <div class="card">
       <div class="card-header">
@@ -72,39 +105,6 @@
         </li>
       </ul>
       <button class="button" (click)="onTodo()">View</button> 
-    </div>
-
-    <!-- Total -->
-    <div class="card">
-      <div class="card-header">
-        <span class="icon total-icon"><i class="fa-solid fa-registered"></i></span>
-        <h2>Total Income</h2>
-      </div>
-      <hr>
-      <div class="total-details">
-        <div class="total-item">
-          <span class="icon income-icon"><i class="fa-solid fa-registered"></i></span>
-          <h3>Current Month Income</h3>
-          <p>{{ totalCurrentMonthIncome | currency }}</p>
-        </div>
-        <div class="total-item">
-          <span class="icon expense-icon"> <span class="icon expense-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
-            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
-            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
-          </svg></span>
-          </span>
-          <h3>Current Month Expense</h3>
-          <p>{{ totalCurrentMonthExpense | currency }}</p>
-        </div>
-        <hr class="total-line">
-        <div class="total-item">
-          <span class="icon trans-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet2" viewBox="0 0 16 16">
-            <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z"/>
-          </svg></span>
-          <h3>Current Month Savings</h3>
-          <p>{{ currentMonthSavings | currency }}</p>
-        </div>
-      </div>
     </div>
   </div>
 </div>

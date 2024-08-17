@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Expense } from 'src/app/models/Expense';
 import { ExpenseService } from 'src/app/services/expense.service';
 
@@ -14,7 +15,8 @@ export class ExpensesComponent implements OnInit {
   expenses: Expense[] = [];
   monthSelected: boolean = false;
 
-  constructor(private fb: FormBuilder, private expenseService: ExpenseService) {}
+  constructor(private fb: FormBuilder, private expenseService: ExpenseService, 
+    public router: Router) {}
 
   ngOnInit(): void {
     this.expenseForm = this.fb.group({
@@ -59,7 +61,7 @@ export class ExpensesComponent implements OnInit {
   }
 
   onBack() {
-    // Navigate to the previous page or home page
+    this.router.navigate(['/home']);
   }
 
   saveForm() {
