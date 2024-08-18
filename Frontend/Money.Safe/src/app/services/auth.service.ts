@@ -53,6 +53,16 @@ export class AuthService {
     return localStorage.getItem('jwt_token') || sessionStorage.getItem('jwt_token');
   }
 
+  getUsername(): string | null {
+    const token = this.getToken();
+    if (token) {
+      const decoded = this.decodeToken(token);
+      return decoded ? decoded.firstName : null;
+    }
+    return null;
+  }
+
+
   setToken(token: string): void {  // Default value added
       sessionStorage.setItem('jwt_token', token);
   }
