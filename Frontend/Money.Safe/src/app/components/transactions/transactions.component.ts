@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TransactionsService } from 'src/app/services/transactions.service';
 
@@ -9,82 +9,64 @@ import { TransactionsService } from 'src/app/services/transactions.service';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent {
-  todoForm: any;
-  selectedMonth: string;
-  expenses: { month: string, expenseAmount: number }[] = [
-    { month: 'January', expenseAmount: 1500 },
-    { month: 'February', expenseAmount: 2000 },
-    { month: 'March', expenseAmount: 1800 }
-  ];
-  monthSelected: boolean = false;
-  januaryExpense: any[] = [
-    { expenseType: 'Recharge', expenseAmount: 1000 },
-    { expenseType: 'Light Bills', expenseAmount: 500 },
-  ];
-  februaryExpense: any[] = [
-    { expenseType: 'Essentials', expenseAmount: 200 },
-    { expenseType: 'Light Bills', expenseAmount: 400 }
-  ];
-  marchExpense: any[] = [
-    { expenseType: 'Recharge', expenseAmount: 1100 },
-    { expenseType: 'Essentials', expenseAmount: 250 }
-  ];
+  todoForm: FormGroup;
+  selectedMonth: string = '';
+  transactions: any[] = [];
+  totalExpense: number = 0;
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.selectedMonth = new Date().toLocaleString('default', { month: 'long' });
+  constructor(
+    private fb: FormBuilder,
+    private transactionService: TransactionsService,
+    private router: Router,
+  ) {
+    this.todoForm = this.fb.group({
+      month: ['']
+    });
   }
 
-  ngOnInit(): void {
-    this.todoForm = this.fb.group({
-      month: ['', Validators.required],
-      expenseType: ['', Validators.required],
-      expenseAmount: ['', Validators.required]
+  ngOnInit() {
+    this.todoForm.get('month')?.valueChanges.subscribe(month => {
+      if (month) {
+        this.selectedMonth = month;
+        this.getTransactions(month);
+        this.getTotalExpense(month);
+      }
+    });
+  }
+
+  getTransactions(month: string) {
+    this.transactionService.getTransactionsByMonth(month).subscribe(data => {
+      this.transactions = data;
+    });
+  }
+
+  getTotalExpense(month: string) {
+    this.transactionService.getTotalExpense(month).subscribe(total => {
+      this.totalExpense = total;
     });
   }
 
   onSubmitExpense() {
-    if (this.todoForm.valid) {
-      const newExpense = this.todoForm.value;
-      this.getFilteredExpenses().push(newExpense);
-      this.todoForm.reset();
-    }
+    // Handle form submission
   }
 
   onChangeExpense(event: any) {
-    this.selectedMonth = event.target.value;
-    this.monthSelected = true;
-    this.getFilteredExpenses();
+    // Handle change
   }
 
   getFilteredExpenses() {
-    switch (this.selectedMonth) {
-      case 'January':
-        return this.januaryExpense;
-      case 'February':
-        return this.februaryExpense;
-      case 'March':
-        return this.marchExpense;
-      default:
-        return [];
-    }
+    return this.transactions;
   }
 
-  calculateTotalExpense(month: string): number {
-    return this.getFilteredExpenses().reduce((acc, curr) => acc + curr.expenseAmount, 0);
-  }
-
-  onSave() {
-    if (this.todoForm.valid) {
-      this.todoForm.reset({ month: this.selectedMonth });
-      this.getFilteredExpenses();
-    }
-  }
-
-  saveForm() {
-    console.log("Form saved!");
+  calculateTotalExpense(month: string) {
+    return this.totalExpense;
   }
 
   onBack() {
     this.router.navigate(['/home']);
+  }
+
+  saveForm() {
+    console.log("Form saved!");
   }
 }
