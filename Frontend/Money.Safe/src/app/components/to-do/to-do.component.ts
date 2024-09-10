@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TodoService } from 'src/app/services/todo.service';
+import { ToastComponent } from '../toast/toast.component';
 
 @Component({
   selector: 'app-to-do',
@@ -9,6 +10,9 @@ import { TodoService } from 'src/app/services/todo.service';
   styleUrls: ['./to-do.component.scss']
 })
 export class ToDoComponent implements OnInit {
+
+  @ViewChild(ToastComponent) toast!: ToastComponent;
+
   todoForm: any;
   selectedMonth: string;
   expenses: any[] = [];
@@ -73,7 +77,7 @@ export class ToDoComponent implements OnInit {
   }
 
   onBack() {
-    this.router.navigate(['/budget-planner/dashboard']);
+    this.router.navigate(['/home']);
   }
 
   toggleSelection(expense: any) {
@@ -81,6 +85,7 @@ export class ToDoComponent implements OnInit {
   }
 
   saveForm() {
-    console.log("Form saved!");
+    this.toast.showToast('To Do Transaction saved!');
   }
+
 }

@@ -2,13 +2,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
+import { environment, environments } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BalanceTrackingService {
-  private apiUrl = `${environment.apiBaseUrl}/income`;
+  private apiUrl = `${environments.apiBaseUrl}/income`;
 
   constructor(private http: HttpClient) {}
 

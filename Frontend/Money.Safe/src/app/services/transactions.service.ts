@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
+import { environment, environments } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionsService {
 
-  private apiUrl = `${environment.apiBaseUrl}/transHistory`;
+  private apiUrl = `${environments.apiBaseUrl}/transHistory`;
 
   constructor(private http: HttpClient) { }
 

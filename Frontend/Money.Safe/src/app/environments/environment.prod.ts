@@ -1,11 +1,7 @@
-//environment.ts
-export const environments = {
-    production: false,
-    apiBaseUrl: 'http://localhost:8080/api/v1'
-  };
-
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
   export const environment = {
-    production : true,
+    production : false,
     firebaseConfig: {
         apiKey: "AIzaSyACl-NxJUi6jbAtZydwIpFEeDq8Mtp_5wI",
         authDomain: "personalapp-b84fa.firebaseapp.com",
@@ -16,6 +12,3 @@ export const environments = {
         measurementId: "G-MR5T1QSJXY"
       }
   }
-
-
-

@@ -18,6 +18,7 @@ import { ExpensesComponent } from './components/expenses/expenses.component';
 import { ToDoComponent } from './components/to-do/to-do.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { environment } from './environments/environment';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,8 @@ import { ToastComponent } from './components/toast/toast.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    // AngularFireModule.initializeApp(environment.firebaseConfig),
+    // AngularFireAuthModule,
     ToastrModule.forRoot(
       {
         timeOut: 3000,

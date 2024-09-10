@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
-import { environment } from '../environments/environment';
+import { environment, environments } from '../environments/environment';
 import { RegisterRequest } from '../models/RegisterRequest';
 import { AuthenticationResponse } from '../models/AuthenticationResponse';
 import { LoginRequest } from '../models/LoginRequest';
@@ -22,7 +22,7 @@ export class AuthService {
   ) {}
 
   signUp(registerRequest: RegisterRequest): Observable<AuthenticationResponse> {
-    return this.http.post<AuthenticationResponse>(`${environment.apiBaseUrl}/auth/register`, registerRequest)
+    return this.http.post<AuthenticationResponse>(`${environments.apiBaseUrl}/auth/register`, registerRequest)
       .pipe(
         tap(response => {
           this.setToken(response.token);  // Default to long-lived token for registration
@@ -34,7 +34,7 @@ export class AuthService {
   }
 
   signIn(loginRequest: LoginRequest): Observable<AuthenticationResponse> {
-    return this.http.post<AuthenticationResponse>(`${environment.apiBaseUrl}/auth/authenticate`, loginRequest)
+    return this.http.post<AuthenticationResponse>(`${environments.apiBaseUrl}/auth/authenticate`, loginRequest)
       .pipe(
         tap(response => {
           this.setToken(response.token);
@@ -79,12 +79,12 @@ export class AuthService {
   }
 
   googleAuth(idToken: string): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}/auth/google`, { idToken });
+    return this.http.post(`${environments.apiBaseUrl}/auth/google`, { idToken });
   }
 
   handleAuthSuccess(data: any): void {
     sessionStorage.setItem('user', JSON.stringify(data));
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
 
   handleAuthError(error: any, defaultMessage: string): void {

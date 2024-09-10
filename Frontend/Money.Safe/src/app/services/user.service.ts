@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, of, throwError } from 'rxjs';
-import { environment } from '../environments/environment';
+import { environment, environments } from '../environments/environment';
 import { Users } from '../models/Users';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 })
 export class UserService {
 
-  private apiUrl = `${environment.apiBaseUrl}/auth`;
+  private apiUrl = `${environments.apiBaseUrl}/auth`;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
