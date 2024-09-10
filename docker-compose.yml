@@ -3,7 +3,7 @@ services:
   # Angular Frontend
   frontend:
     build:
-      context: ./frontend/money.safe
+      context: ./Frontend/Money.Safe
       dockerfile: Frontend.Dockerfile
     ports:
       - "4200:80"
@@ -15,12 +15,12 @@ services:
   # Spring Boot Backend
   backend:
     build:
-      context: ./money.safe/backend/money.safe
+      context: ./Backend/Money.Safe
       dockerfile: Backend.Dockerfile
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/personalapp_db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/personalapp_db
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: admin123
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
