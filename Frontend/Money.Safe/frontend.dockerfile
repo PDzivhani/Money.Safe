@@ -13,5 +13,7 @@ RUN npm run build --prod
 # Stage 2: Serve the Angular app with nginx
 FROM nginx:alpine
 COPY --from=build /app/dist/frontend/money.safe /usr/share/nginx/html
-EXPOSE 80
+#Informs Docker that the container will listen on network ports at runtime, and the specified port is 80.
+EXPOSE 4202
+
 CMD ["nginx", "-g", "daemon off;"]

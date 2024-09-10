@@ -1,33 +1,15 @@
 version: '3.8'
 services:
-  # Angular Frontend
-  frontend:
-    build:
-      context: ./Frontend/Money.Safe
-      dockerfile: Frontend.Dockerfile
-    ports:
-      - "4200:80"
-    depends_on:
-      - backend
-    networks:
-      - app-network
-
-  # Spring Boot Backend
-  backend:
-    build:
-      context: ./Backend/Money.Safe
-      dockerfile: Backend.Dockerfile
-    ports:
-      - "8080:8080"
+  playground-web-frontend:
+    image: playground-web-frontend:latest
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/personalapp_db
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin123
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-    depends_on:
-      - db
-    networks:
-      - app-network
+      PORT: 4202
+    ports:
+      - 4202:4202
+  playground-web-backend:
+    image: playground-web-backend:latest
+    ports:
+      - 8080:8080
 
   # PostgreSQL Database
   db:
