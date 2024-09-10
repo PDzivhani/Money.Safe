@@ -1,5 +1,6 @@
 package com.Fullstack.MoneySafe.entity;
 
+import com.Fullstack.MoneySafe.enums.AuthProvider;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -51,6 +52,9 @@ public class User implements UserDetails {
     private String image;
 
     private String GEmail;
+
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
 
 
     @Override

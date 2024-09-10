@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -29,25 +30,27 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/v1/auth/**").permitAll()
-//                        .requestMatchers("/", "/login", "/error").permitAll()
                         .requestMatchers("/api/v1/income/**").permitAll()
                         .requestMatchers("/api/v1/todo/**").permitAll()
-//                        .requestMatchers("/api/transactions").permitAll()
                         .requestMatchers("/api/v1/expenses/**").permitAll()
                         .requestMatchers("/api/v1/transHistory/**").permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/api/v1/events/**").permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/api/v1/eventCategories/**").permitAll()
+                        .requestMatchers("/oauth2/**").permitAll() // Allow OAuth2 routes
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
+                .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl("/home", true)  // Redirect after successful login
+                        .failureUrl("/login?error=true")   // Redirect after failed login
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .userService(userService) // Custom user service to load user data
+                        )
+                )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
-
-
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
@@ -61,5 +64,4 @@ public class SecurityConfiguration {
     public UserDetailsService userDetailsService() {
         return userService;
     }
-
 }

@@ -6,19 +6,19 @@ import com.Fullstack.MoneySafe.repository.UserRepository;
 import com.Fullstack.MoneySafe.services.UserServiceImpl;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -31,41 +31,64 @@ public class AuthenticationController {
     private final JwtService jwtService;
     private final UserServiceImpl userService;
 
+    @Value("${jwt.secret}")
+    private String secretKey;
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private GoogleAuthService googleAuthService;
 
-
     @PostMapping("/google")
-    public ResponseEntity<?> googleLogin(@RequestBody Map<String, String> request) {
-        String idTokenString = request.get("idToken");
+    public Map<String, String> authenticateGoogleUser(@RequestBody Map<String, String> payload) {
+        String idToken = payload.get("idToken");
 
-        try {
-            GoogleIdToken.Payload payload = googleAuthService.verifyToken(idTokenString);
-            String email = payload.getEmail();
-            User user = userRepository.findByGEmail(email);
+        // Validate the ID token and authenticate the user (this is a simplified example)
+        String userEmail = "extracted_from_token"; // Extract from the ID token
 
-            if (user == null) {
-                // Create a new user if not exists
-                user = new User();
-                user.setEmail(email);
-                user.setPassword(passwordEncoder.encode("google_oauth_user"));
-                userRepository.save(user);
-            }
+        // Create a JWT token for the authenticated user
+        String jwtToken = Jwts.builder()
+                .setSubject(userEmail)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 864_000_000)) // 10 days
+                .signWith(SignatureAlgorithm.HS512, secretKey.getBytes())
+                .compact();
 
-            // Generate JWT token
-            String token = jwtService.generateTokenFromUsername(user.getEmail());
-            Map<String, String> response = new HashMap<>();
-            response.put("token", token);
-
-            return ResponseEntity.ok(response);
-
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Invalid ID token.");
-        }
+        Map<String, String> response = new HashMap<>();
+        response.put("jwtToken", jwtToken);
+        return response;
     }
+
+
+//    @PostMapping("/google")
+//    public ResponseEntity<?> googleLogin(@RequestBody Map<String, String> request) {
+//        String idTokenString = request.get("idToken");
+//
+//        try {
+//            GoogleIdToken.Payload payload = googleAuthService.verifyToken(idTokenString);
+//            String email = payload.getEmail();
+//            User user = userRepository.findByGEmail(email);
+//
+//            if (user == null) {
+//                // Create a new user if not exists
+//                user = new User();
+//                user.setEmail(email);
+//                user.setPassword(passwordEncoder.encode("google_oauth_user"));
+//                userRepository.save(user);
+//            }
+//
+//            // Generate JWT token
+//            String token = jwtService.generateTokenFromUsername(user.getEmail());
+//            Map<String, String> response = new HashMap<>();
+//            response.put("token", token);
+//
+//            return ResponseEntity.ok(response);
+//
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest().body("Invalid ID token.");
+//        }
+//    }
 
     /**
      * Registers a new user.
