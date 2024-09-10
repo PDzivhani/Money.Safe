@@ -1,0 +1,47 @@
+version: '4'
+services:
+  # Angular Frontend
+  frontend:
+    build:
+      context: ./frontend/money.safe
+      dockerfile: Frontend.Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  # Spring Boot Backend
+  backend:
+    build:
+      context: ./backend/money.safe
+      dockerfile: Backend.Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/personalapp_db
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  # PostgreSQL Database
+  db:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_DB: personalapp_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+# Define the shared network
+networks:
+  app-network:
+    driver: bridge
