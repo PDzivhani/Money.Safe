@@ -1,17 +1,34 @@
 version: '3.8'
 services:
-  playground-web-frontend:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     image: playground-web-frontend:latest
-    environment:
-      PORT: 4202
     ports:
-      - 4202:4202
-  playground-web-backend:
-    image: playground-web-backend:latest
-    ports:
-      - 8080:8080
+      - "4202:80" # Nginx is exposing on port 80 inside the container
+    depends_on:
+      - backend
+    networks:
+      - app-network
 
-  # PostgreSQL Database
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: playground-web-backend:latest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/personalapp_db
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
   db:
     image: postgres:14-alpine
     environment:
@@ -23,7 +40,6 @@ services:
     networks:
       - app-network
 
-# Define the shared network
 networks:
   app-network:
     driver: bridge
