@@ -23,7 +23,9 @@ FROM openjdk:17-jdk-slim
 
 # Copy the jar file from the build stage
 # COPY --from=build /workspace/target/*.jar /app.jar
-COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar /app/app.jar
+# COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar /app/app.jar
+# Copy the jar file from the build stage
+COPY --from=build /app/target/*.jar /app/app.jar
 
 # Expose $PORT on container.
 # We use a varibale here as the port is something that can differ on the environment.
