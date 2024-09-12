@@ -13,7 +13,7 @@ services:
 
   backend:
     build:
-      context: ./Backend/Money.Safe
+      context: ./Backend/MoneySafe
       dockerfile: Backend.Dockerfile
     image: playground-web-backend:latest
     environment:
