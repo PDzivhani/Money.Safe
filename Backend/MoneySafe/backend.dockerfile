@@ -26,7 +26,7 @@ RUN ls /app/target/
 FROM openjdk:17-jdk-slim
 
 # Copy the jar file from the build stage
-# COPY --from=build /app/target/*.jar /app/app.jar
+# COPY --from=build /app/target/*.jar /app/app/target/app.jar
 COPY --from=build /app/target/MoneySafe-0.0.1-SNAPSHOT.jar /app/target/app.jar
 
 # Expose $PORT on container.
@@ -34,4 +34,4 @@ COPY --from=build /app/target/MoneySafe-0.0.1-SNAPSHOT.jar /app/target/app.jar
 EXPOSE 8080
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/target/app.jar"]
