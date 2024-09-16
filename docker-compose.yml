@@ -18,7 +18,7 @@ services:
     image: playground-web-backend:latest
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/personalapp_db
-      SPRING_DATASOURCE_USERNAME: db_admin
+      SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: admin123
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     ports:
