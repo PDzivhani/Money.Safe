@@ -5,7 +5,7 @@ services:
       dockerfile: Frontend.Dockerfile
     image: playground-web-frontend:latest
     ports:
-      - "4202:80" # Nginx is exposing on port 80 inside the container
+      - "4200:80" # Nginx is exposing on port 80 inside the container
     depends_on:
       - backend
     networks:
