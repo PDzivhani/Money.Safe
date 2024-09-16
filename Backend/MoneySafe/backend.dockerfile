@@ -27,7 +27,7 @@ FROM openjdk:17-jdk-slim
 
 # Copy the jar file from the build stage
 # COPY --from=build /workspace/target/*.jar /app.jar
-COPY --from=build /app/target/moneysafe-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar /app/app.jar
 # Copy the jar file from the build stage
 # COPY --from=build /app/target/*.jar /app/app.jar
 
