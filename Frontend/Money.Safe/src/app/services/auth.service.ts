@@ -95,16 +95,7 @@ export class AuthService {
     return localStorage.getItem('refresh_token') || sessionStorage.getItem('refresh_token');
   }
 
-  // refreshToken(refreshToken: string): Observable<AuthenticationResponse> {
-  //   return this.http.post<AuthenticationResponse>(`${environment.apiBaseUrl}/auth/refresh-token`, { refreshToken })
-  //     .pipe(
-  //       tap(response => {
-  //         this.setToken(response.token, this.isTokenInLocalStorage());
-  //         this.setRefreshToken(response.refreshToken, this.isTokenInLocalStorage());
-  //       }),
-  //       catchError(this.handleError)
-  //     );
-  // }
+
 
   private isTokenInLocalStorage(): boolean {
     return !!localStorage.getItem('jwt_token');
@@ -162,3 +153,15 @@ export class AuthService {
     return throwError(error.error.message);
   }
 }
+
+
+  // refreshToken(refreshToken: string): Observable<AuthenticationResponse> {
+  //   return this.http.post<AuthenticationResponse>(`${environment.apiBaseUrl}/auth/refresh-token`, { refreshToken })
+  //     .pipe(
+  //       tap(response => {
+  //         this.setToken(response.token, this.isTokenInLocalStorage());
+  //         this.setRefreshToken(response.refreshToken, this.isTokenInLocalStorage());
+  //       }),
+  //       catchError(this.handleError)
+  //     );
+  // }
